@@ -1,16 +1,27 @@
 # CLAUDE.md
 
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 ## Panoramica del progetto
-- Progetto ASP.NET Core Web API per la gestione CRUD degli utenti.
-- Usa Entity Framework Core con database InMemory per la persistenza locale.
 
-## Comandi utili
-- Build: dotnet build UserCrudApp/UserCrudApp.csproj
-- Esecuzione: dotnet run --project UserCrudApp/UserCrudApp.csproj
+Web API ASP.NET Core (Minimal API, .NET 8) per la gestione CRUD di utenti, sviluppata come esercizio di documentazione tecnica. Il codice sorgente vive interamente nella sottocartella `UserCrudApp/`; la root del repo contiene solo `UserCrudApp.slnx`, `README.md` e questo file.
 
-## Endpoint disponibili
-- GET /users
-- GET /users/{id}
-- POST /users
-- PUT /users/{id}
-- DELETE /users/{id}
+## Comandi
+
+- Build: `dotnet build UserCrudApp/UserCrudApp.csproj`
+- Esecuzione: `dotnet run --project UserCrudApp/UserCrudApp.csproj` (in ambiente `Development` espone Swagger UI su `/swagger`)
+- Non esiste un progetto di test nel repository; non c'è quindi un comando `dotnet test` funzionante.
+
+## Architettura
+
+Tutta la logica applicativa è concentrata in [Program.cs](UserCrudApp/Program.cs): non ci sono controller, servizi applicativi o layer di repository separati. Il flusso è:
+
+1. `Program.cs` registra `UserDbContext` con provider **EF Core InMemory** (database `UsersDb`) e definisce i 5 endpoint CRUD direttamente come lambda su `WebApplication` (`MapGet`/`MapPost`/`MapPut`/`MapDelete`).
+2. [Data/UserDbContext.cs](UserCrudApp/Data/UserDbContext.cs) espone un solo `DbSet<User>`.
+3. [Models/User.cs](UserCrudApp/Models/User.cs) è l'entità persistita (Id, Name, Email); [Models/UserDtos.cs](UserCrudApp/Models/UserDtos.cs) definisce i record `CreateUserRequest`/`UpdateUserRequest` usati come payload delle richieste.
+
+Punti da tenere presenti quando si modifica il codice:
+
+- Il database è **in memoria**: i dati non sopravvivono al riavvio del processo; non ci sono migrazioni EF Core da gestire.
+- Non ci sono validazioni sui DTO in ingresso né autenticazione/autorizzazione: qualsiasi aggiunta in questo senso va introdotta ex novo.
+- [UserCrudApp.http](UserCrudApp/UserCrudApp.http) contiene ancora la richiesta di scaffolding `/weatherforecast/`, non coerente con gli endpoint CRUD reali: va aggiornato se si usa questo file per test manuali.
