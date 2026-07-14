@@ -71,3 +71,5 @@ app.MapDelete("/users/{id}", async (int id, UserDbContext context) =>
 });
 
 app.Run();
+
+public partial class Program { }

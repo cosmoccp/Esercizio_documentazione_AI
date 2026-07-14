@@ -62,7 +62,7 @@ Il progetto utilizza le seguenti tecnologie:
 
 - C#;
 - ASP.NET Core Web API;
-- .NET 8;
+- .NET 10;
 - Minimal API;
 - Entity Framework Core;
 - Entity Framework Core InMemory;
@@ -78,7 +78,7 @@ Dipendenze principali dichiarate nel file `UserCrudApp.csproj`:
 
 Per compilare ed eseguire il progetto sono necessari:
 
-- .NET SDK 8.0 o superiore compatibile con `net8.0`;
+- .NET SDK 10.0 o superiore compatibile con `net10.0`;
 - Git, per clonare il repository;
 - un editor o IDE compatibile con progetti ASP.NET Core, ad esempio Visual Studio, Visual Studio Code o Rider.
 

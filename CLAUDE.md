@@ -4,13 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Panoramica del progetto
 
-Web API ASP.NET Core (Minimal API, .NET 8) per la gestione CRUD di utenti, sviluppata come esercizio di documentazione tecnica. Il codice sorgente vive interamente nella sottocartella `UserCrudApp/`; la root del repo contiene solo `UserCrudApp.slnx`, `README.md` e questo file.
+Web API ASP.NET Core (Minimal API, .NET 10) per la gestione CRUD di utenti, sviluppata come esercizio di documentazione tecnica. Il codice sorgente vive interamente nella sottocartella `UserCrudApp/`; la root del repo contiene solo `UserCrudApp.slnx`, `README.md` e questo file.
 
 ## Comandi
 
 - Build: `dotnet build UserCrudApp/UserCrudApp.csproj`
 - Esecuzione: `dotnet run --project UserCrudApp/UserCrudApp.csproj` (in ambiente `Development` espone Swagger UI su `/swagger`)
-- Non esiste un progetto di test nel repository; non c'è quindi un comando `dotnet test` funzionante.
+- Test: `dotnet test UserCrudApp.Tests/UserCrudApp.Tests.csproj` (progetto xUnit con test di integrazione via `WebApplicationFactory` sui 5 endpoint CRUD)
 
 ## Architettura
 
