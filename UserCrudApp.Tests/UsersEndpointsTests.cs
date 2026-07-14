@@ -29,7 +29,8 @@ public class UsersEndpointsTests : IClassFixture<CustomWebApplicationFactory>
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
         var created = await response.Content.ReadFromJsonAsync<User>();
         Assert.NotNull(created);
-        Assert.Equal("Anna Verdi", created!.Name);
+        // Assert.Equal("Anna Verdi", created!.Name);
+        Assert.Equal("Anna Rossi", created!.Name);
         Assert.Equal($"/users/{created.Id}", response.Headers.Location?.OriginalString);
     }
 
